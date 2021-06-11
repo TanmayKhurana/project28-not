@@ -24,6 +24,7 @@ function setup() {
 	
 
 	//Create the Bodies Here.
+  
 	ground = Bodies.rectangle(750, 740, 10000, 20,{isStatic:true})
 	World.add(world, ground)
 
@@ -31,7 +32,7 @@ function setup() {
 
 	boy = new Boy(300, 645, 2)
 
-	stone = new Stone(200, 540, 6)
+	stone = new Stone(200, 540, 60)
 
 	mango1 = new Mango(1200, 200, 35)
 	mango2 = new Mango(1200, 250, 35)
@@ -59,22 +60,6 @@ function draw() {
   rectMode(CENTER);
   background("grey");
 
-  detectCollision(stone, mango1)
-  detectCollision(stone, mango2)
-  detectCollision(stone, mango3)
-  detectCollision(stone, mango4)
-  detectCollision(stone, mango5)
-  detectCollision(stone, mango6)
-  detectCollision(stone, mango7)
-  detectCollision(stone, mango8)
-  detectCollision(stone, mango9)
-  detectCollision(stone, mango10)
-  detectCollision(stone, mango11)
-  detectCollision(stone, mango12)
-  detectCollision(stone, mango13)
-  detectCollision(stone, mango14)
-  
-  
   tree.display()
   
   boy.display()
@@ -98,6 +83,21 @@ function draw() {
 
   chain1.display()
 
+  detectCollision(stone, mango1)
+  detectCollision(stone, mango2)
+  detectCollision(stone, mango3)
+  detectCollision(stone, mango4)
+  detectCollision(stone, mango5)
+  detectCollision(stone, mango6)
+  detectCollision(stone, mango7)
+  detectCollision(stone, mango8)
+  detectCollision(stone, mango9)
+  detectCollision(stone, mango10)
+  detectCollision(stone, mango11)
+  detectCollision(stone, mango12)
+  detectCollision(stone, mango13)
+  detectCollision(stone, mango14)
+
   drawSprite()
 }
 function mouseDragged(){
@@ -108,19 +108,21 @@ function mouseReleased(){
 }
 
 
-function keyPressed() {
-	if (keyCode === 32) {
-		Matter.Body.setPosition(stone.body, {x:200, y:540})
-			launcherObject.attach(stone.body)
-	}
-}
+
 
 function detectCollision(lstone, lmango){
 	mangoBodyPosition=lmango.body.position
 	stoneBodyPosition=lstone.body.position
 
 	var distance = dist(stoneBodyPosition.x, stoneBodyPosition.y, mangoBodyPosition.x, mangoBodyPosition.y)
-	if(distance>lmango.r+lstone.r){
+	if(distance<=lmango.r+lstone.r){
 		Matter.Body.setStatic(lmango.body,false);
+	}
+}
+
+function keyPressed() {
+	if (keyCode === 32) {
+		Matter.Body.setPosition(stone.body, {x:200, y:540})
+		chain1.attach(stone.body)
 	}
 }

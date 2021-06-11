@@ -20,4 +20,7 @@ class chain {
     fly(){
         this.body.bodyA = null
     }
+    attach(body){
+        this.chain.body = bodyA
+    }
 }
